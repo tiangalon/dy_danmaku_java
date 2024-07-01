@@ -6,6 +6,7 @@ import okhttp3.WebSocket;
 
 
 public class WebSocketClient {
+    WebSocket ws;
     /**
      * websocket连接
      * @param url websocket地址
@@ -20,6 +21,15 @@ public class WebSocketClient {
             .header("Cookie", "ttwid="+ ttwid)
             .build();
         WSListener Listener = new WSListener();
-        WebSocket ws = client.newWebSocket(request, Listener);
+        ws = client.newWebSocket(request, Listener);
+    }
+
+    /**
+     * websocket关闭
+     */
+    public void close() {
+        if (ws != null) {
+            ws.close(0, "websocket已关闭");
+        }
     }
 }

@@ -2,6 +2,7 @@ package com.DyDanmaku;
 
 import java.io.*;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
     /**
@@ -36,7 +37,7 @@ public class Main {
 
     public static void main(String[] args){
         //直播间网页id， 即直播间网址https://live.douyin.com/后面的数字部分
-        String live_id = "20033723905";
+        String live_id = "94534935545";
 
         //从直播间网页相应中获取roomId, user_unique_id, ttwid
         String live_url = "https://live.douyin.com/" + live_id;
@@ -77,7 +78,11 @@ public class Main {
             "&insert_task_id=&live_reason=&room_id=" + roomId + "&heartbeatDuration=0&signature=";
             WebSocketClient listener = new WebSocketClient();
             listener.connect(wss_url, UserAgent, ttwid);
-
+            Scanner scanner = new Scanner(System.in);
+            if (scanner.nextLine().equals("exit")) {
+                listener.close();
+                scanner.close();
+            }
         } else {
             System.out.println("无法获取参数");
         }

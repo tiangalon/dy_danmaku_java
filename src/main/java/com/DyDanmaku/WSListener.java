@@ -11,11 +11,24 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.zip.GZIPInputStream;
+import java.util.Date;
 
 public class WSListener extends WebSocketListener {
+    //计时器
+    Date StartTime, EndTime;
+
     @Override
     public void onOpen(WebSocket webSocket, Response response){
         System.out.println("已连接至服务器");
+        StartTime = new Date();
+    }
+
+    @Override
+    public void onClosed(WebSocket webSocket, int code, String reason){
+        System.out.println("已断开连接");
+        EndTime = new Date();
+        long time = (EndTime.getTime() - StartTime.getTime()) / 1000;
+        System.out.println("运行时间：" + time + "秒");
     }
 
     @Override
@@ -42,6 +55,20 @@ public class WSListener extends WebSocketListener {
             try {
                 Msg = Douyin.Response.parseFrom(uncompressedBytes);
                 //JsonMsg = JsonFormat.printer().print(Msg);
+
+                //发送ack
+                if (Msg.getNeedAck() == true){
+                    Douyin.PushFrame AckFrame = Douyin.PushFrame.newBuilder()
+                            .setLogId(MsgFrame.getLogId())
+                            .setPayloadType("ack")
+                            .setPayload(Msg.getInternalExtBytes())
+                            .build();
+                    byte[] AckMsg = AckFrame.toByteArray();
+                    ByteString AckByteString = ByteString.of(AckMsg);
+                    webSocket.send(AckByteString);
+                    //System.out.println("已发送ack");
+                }
+
                 for (Douyin.Message SingleMsg : Msg.getMessagesListList()){
                     String method = SingleMsg.getMethod();
                     switch (method) {
