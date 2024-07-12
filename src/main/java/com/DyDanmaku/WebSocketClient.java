@@ -4,8 +4,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.WebSocket;
 
-
 public class WebSocketClient {
+    WSListener Listener = new WSListener();
     WebSocket ws;
     /**
      * websocket连接
@@ -20,7 +20,6 @@ public class WebSocketClient {
             .header("User-Agent", useragent)
             .header("Cookie", "ttwid="+ ttwid)
             .build();
-        WSListener Listener = new WSListener();
         ws = client.newWebSocket(request, Listener);
     }
 
@@ -29,7 +28,9 @@ public class WebSocketClient {
      */
     public void close() {
         if (ws != null) {
-            ws.close(0, "websocket已关闭");
+            ws.close(1000, "close");
+            Listener.onClosing(ws, 1000, "close");
+            Listener.onClosed(ws, 1000, "close");
         }
     }
 }

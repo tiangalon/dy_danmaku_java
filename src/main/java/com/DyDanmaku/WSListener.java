@@ -15,25 +15,26 @@ import java.util.Date;
 
 public class WSListener extends WebSocketListener {
     //计时器
-    Date StartTime, EndTime;
+//    Date StartTime, EndTime;
 
     @Override
     public void onOpen(WebSocket webSocket, Response response){
         System.out.println("已连接至服务器");
-        StartTime = new Date();
+//        StartTime = new Date();
     }
 
     @Override
     public void onClosed(WebSocket webSocket, int code, String reason){
+        super.onClosed(webSocket, code, reason);
         System.out.println("已断开连接");
-        EndTime = new Date();
-        long time = (EndTime.getTime() - StartTime.getTime()) / 1000;
-        System.out.println("运行时间：" + time + "秒");
+//        EndTime = new Date();
+//        long time = (EndTime.getTime() - StartTime.getTime()) / 1000;
+//        System.out.println("运行时间：" + time + "秒");
+//        webSocket.close(1000, "bye");
     }
 
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response){
-        System.out.println("服务器连接失败");
         t.printStackTrace();
     }
 

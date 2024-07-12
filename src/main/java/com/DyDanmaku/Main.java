@@ -37,11 +37,11 @@ public class Main {
 
     public static void main(String[] args){
         //直播间网页id， 即直播间网址https://live.douyin.com/后面的数字部分
-        String live_id = "94534935545";
+        String live_id = "379772478844";
 
         //从直播间网页相应中获取roomId, user_unique_id, ttwid
         String live_url = "https://live.douyin.com/" + live_id;
-        String UserAgent = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36";
+        String UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         Map<String, String> params = myRequest.getParams(live_id);
         if (params != null) {
             String roomId = params.get("roomId");
@@ -55,34 +55,48 @@ public class Main {
              * System.out.println("ttwid: " + ttwid);
              */
 
-            /*
-             * 根据roomId和user_unique_id获取Signature（目前无需Signature也可连接，暂时停用）
-             * String signature = sign(roomId, user_unique_id);
-             * System.out.println("Signature: " + signature);
-             */
+
+             //根据roomId和user_unique_id获取Signature
+             String signature = sign(roomId, user_unique_id);
+             //System.out.println("Signature: " + signature);
+
 
             //拼接url,连接websocket
-            String wss_url = "wss://webcast5-ws-web-lq.douyin.com/webcast/im/push/v2/?" +
-            "app_name=douyin_web&version_code=180800&webcast_sdk_version=1.0.14-beta.0" +
-            "&update_version_code=1.0.14-beta.0&compress=gzip&device_platform=web&cookie_enabled=true&screen_width=1536" +
-            "&screen_height=864&browser_language=zh-CN&browser_platform=Win32&browser_name=Mozilla" +
-            "&browser_version=5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)" +
-            "%20Chrome/126.0.0.0%20Safari/537.36&browser_online=true&tz_name=Asia/Shanghai&" +
-            "cursor=r-1_d-1_u-1_fh-7385824323388707875_t-1719646741156&" +
-            "internal_ext=internal_src:dim|wss_push_room_id:" + roomId + "|wss_push_did:7311183754668557878" +
-            "|first_req_ms:1719646741059|fetch_time:1719646741156|seq:1|wss_info:0-1719646741156-0-0|" +
-            "wrds_v:7311183754668557878&host=https://live.douyin.com&aid=6383" +
-            "&live_id=1&did_rule=3&endpoint=live_pc&support_wrds=1&" +
-            "user_unique_id=7311183754668557878" +
-            "&im_path=/webcast/im/fetch/&identity=audience&need_persist_msg_count=15" +
-            "&insert_task_id=&live_reason=&room_id=" + roomId + "&heartbeatDuration=0&signature=";
+            String wss_url = "wss://webcast5-ws-web-lf.douyin.com/webcast/im/push/v2/?" +
+                    "app_name=douyin_web&" +
+                    "version_code=180800&" +
+                    "webcast_sdk_version=1.0.14-beta.0&" +
+                    "update_version_code=1.0.14-beta.0&" +
+                    "compress=gzip&" +
+                    "device_platform=web&" +
+                    "cookie_enabled=true&" +
+                    "screen_width=2560&" +
+                    "screen_height=1440&" +
+                    "browser_language=zh-CN&" +
+                    "browser_platform=Win32&" +
+                    "browser_name=Mozilla&browser_version=5.0%20(Windows%20NT%2010.0;%20Win64;%20x64)" +
+                    "%20AppleWebKit/537.36%20(KHTML,%20like%20Gecko)%20Chrome/126.0.0.0%20Safari/537.36&" +
+                    "browser_online=true&" +
+                    "tz_name=Asia/Hong_Kong&" +
+                    "cursor=t-1720704550702_r-1_d-1_u-1_h-7385824323388707875&" +
+                    "internal_ext=internal_src:dim|wss_push_room_id:" + roomId + "|wss_push_did:" + user_unique_id + "|first_req_ms:1720704550478|" +
+                    "fetch_time:1720704550602|seq:1|wss_info:0-1720704550602-0-0|wrds_v:7390369768328402246&" +
+                    "host=https://live.douyin.com&" +
+                    "aid=6383&" +
+                    "live_id=1&" +
+                    "did_rule=3&" +
+                    "endpoint=live_pc&support_wrds=1&" +
+                    "user_unique_id=" + user_unique_id + "&" +
+                    "im_path=/webcast/im/fetch/&" +
+                    "identity=audience&" +
+                    "need_persist_msg_count=15&" +
+                    "insert_task_id=&" +
+                    "live_reason=&" +
+                    "room_id=" + roomId + "&" +
+                    "heartbeatDuration=0&" +
+                    "signature=" + signature;
             WebSocketClient listener = new WebSocketClient();
             listener.connect(wss_url, UserAgent, ttwid);
-            Scanner scanner = new Scanner(System.in);
-            if (scanner.nextLine().equals("exit")) {
-                listener.close();
-                scanner.close();
-            }
         } else {
             System.out.println("无法获取参数");
         }
