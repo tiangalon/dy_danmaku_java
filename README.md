@@ -9,6 +9,7 @@ proto解析体来自：https://github.com/saermart/DouyinLiveWebFetcher
 ---------------------------------------------------------------------------------------
 【更新】
 2024.7.12 13:25 修复Signature签名功能 测试可用
+2024.11.30 10:25 修复roomId和user_unique_id获取错误问题 测试可用
 
 效果图：
 ![效果图_24_7_1](https://github.com/tiangalon/dy_danmaku_java/assets/74497485/5f7e8e29-3fc6-4b68-b355-7b11ece071f0)
