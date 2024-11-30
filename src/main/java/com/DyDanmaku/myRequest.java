@@ -51,8 +51,8 @@ public class myRequest {
                     System.out.println("Found roomId: " + m.group());
                 }
                 */
-                roomId = result.substring(result.indexOf("roomId")+11, result.indexOf("roomId") + 30);
-                user_unique_id = result.substring(result.indexOf("user_unique_id")+19, result.indexOf("user_unique_id") + 38);
+                roomId = result.substring(result.lastIndexOf("roomId")+11, result.lastIndexOf("roomId") + 30);
+                user_unique_id = result.substring(result.indexOf("\\\"user_unique_id\\\":\\\"")+21, result.indexOf("\\\"user_unique_id\\\":\\\"") + 40);
                 params.put("roomId", roomId);
                 params.put("user_unique_id", user_unique_id);
 
