@@ -10,32 +10,33 @@ import okio.ByteString;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.concurrent.BrokenBarrierException;
 import java.util.zip.GZIPInputStream;
-import java.util.Date;
 
 public class WSListener extends WebSocketListener {
-    //计时器
-//    Date StartTime, EndTime;
 
     @Override
     public void onOpen(WebSocket webSocket, Response response){
         System.out.println("已连接至服务器");
-//        StartTime = new Date();
     }
 
     @Override
     public void onClosed(WebSocket webSocket, int code, String reason){
         super.onClosed(webSocket, code, reason);
-        System.out.println("已断开连接");
-//        EndTime = new Date();
-//        long time = (EndTime.getTime() - StartTime.getTime()) / 1000;
-//        System.out.println("运行时间：" + time + "秒");
-//        webSocket.close(1000, "bye");
+        //System.out.println("已断开连接");
+        try {
+            Main.barrier.await();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        } catch (BrokenBarrierException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @Override
     public void onFailure(WebSocket webSocket, Throwable t, Response response){
-        t.printStackTrace();
+        //t.printStackTrace();
+        this.onClosed(webSocket, 1000, "error");
     }
 
     @Override
@@ -108,6 +109,7 @@ public class WSListener extends WebSocketListener {
                             Douyin.FansclubMessage FansclubMessage = Douyin.FansclubMessage.parseFrom(SingleMsg.getPayload());
                             System.out.println("【粉丝团】" + FansclubMessage.getContent());
                             break;
+
                         default:
                             //System.out.println("未分类消息: " + method);
                     }
@@ -115,6 +117,7 @@ public class WSListener extends WebSocketListener {
 
             } catch (Exception e) {
                 e.printStackTrace();
+                this.onClosed(webSocket, 1000, "error");
             }
         }
 

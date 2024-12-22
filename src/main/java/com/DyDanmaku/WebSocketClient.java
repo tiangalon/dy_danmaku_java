@@ -9,9 +9,10 @@ public class WebSocketClient {
     WebSocket ws;
     /**
      * websocket连接
-     * @param url websocket地址
-     * @param ttwid 添加cookie的ttwid
+     *
+     * @param url       websocket地址
      * @param useragent 添加请求头的User-Agent
+     * @param ttwid     添加cookie的ttwid
      */
     public void connect(String url, String useragent, String ttwid) {
         OkHttpClient client = new OkHttpClient();
@@ -21,6 +22,7 @@ public class WebSocketClient {
             .header("Cookie", "ttwid="+ ttwid)
             .build();
         ws = client.newWebSocket(request, Listener);
+
     }
 
     /**
