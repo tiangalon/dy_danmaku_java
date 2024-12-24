@@ -87,13 +87,13 @@ public class Main {
 
         //———————————————————————↓↓↓参数设定↓↓↓———————————————————————————————————————
         //直播间网页id， 即直播间网址https://live.douyin.com/后面的数字部分
-        String live_id = "239229687676";
+        String live_id = "510200350291";
 
         //RetryTimes: 重试次数
         //RetryTimes = 0 表示不重试(默认)
         //RetryTimes = -1 表示无限重试
         //RetryTimes = x 表示重试x次(x>0)
-        int RetryTimes = -1;
+        int RetryTimes = 0;
 
         //重试间隔(单位:秒)
         int RetryIntervalSeconds = 1;
@@ -192,20 +192,21 @@ public class Main {
                                 System.out.print("\r连接结束！ " + RetryIntervalSeconds + "秒后进行下一次重试...(" + (retryCount + 1) + "/" + RetryTimes + "次)[" + formatter.format(date) + "]");
                                 Thread.sleep(RetryIntervalSeconds * 1000L);
                             }
-                            params = DyDanmakuRequest.getParams(live_id);
-                            if (params != null) {
-                                live_status = params.get("live_status");
-                                live_title = params.get("live_title");
-                                nickname = params.get("nickname");
-                            }
                         }
                         retryCount++;
-
 
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     } catch (BrokenBarrierException e) {
                         throw new RuntimeException(e);
+                    }
+                }
+                if (RetryTimes != 0) {
+                    params = DyDanmakuRequest.getParams(live_id);
+                    if (params != null) {
+                        live_status = params.get("live_status");
+                        live_title = params.get("live_title");
+                        nickname = params.get("nickname");
                     }
                 }
             } while (RetryTimes < 0 || retryCount < RetryTimes);
