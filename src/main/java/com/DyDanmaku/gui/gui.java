@@ -38,6 +38,7 @@ public class gui extends JFrame {
         String live_url = "https://live.douyin.com/" + live_id;
         DanmakuArea.append("正在尝试连接至" + live_url + "...[" + Main.CurrentTime() + "]\n");
 
+        String UserAgent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36";
         Map<String, String> params = DyDanmakuRequest.getParams(live_id);
         if (params != null) {
             String roomId = params.get("roomId");
