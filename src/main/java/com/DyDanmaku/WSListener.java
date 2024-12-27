@@ -13,7 +13,10 @@ import java.io.IOException;
 import java.util.concurrent.BrokenBarrierException;
 import java.util.zip.GZIPInputStream;
 
-public class WSListener extends WebSocketListener {
+import com.DyDanmaku.gui.gui;
+
+public class WSListener extends WebSocketListener{
+    public gui gui = null;
 
     @Override
     public void onOpen(WebSocket webSocket, Response response){
@@ -77,37 +80,37 @@ public class WSListener extends WebSocketListener {
                         //聊天消息
                         case "WebcastChatMessage":
                             Douyin.ChatMessage ChatMessage = Douyin.ChatMessage.parseFrom(SingleMsg.getPayload());
-                            System.out.println("【消息】" + ChatMessage.getUser().getNickName() + "：" + ChatMessage.getContent());
+                            MsgOutput("【消息】" + ChatMessage.getUser().getNickName() + "：" + ChatMessage.getContent());
                             break;
 
                         //进入直播间消息
                         case "WebcastMemberMessage":
                             Douyin.MemberMessage MemberMessage = Douyin.MemberMessage.parseFrom(SingleMsg.getPayload());
-                            System.out.println("【入场】" + MemberMessage.getUser().getNickName() + "进入了直播间");
+                            MsgOutput("【入场】" + MemberMessage.getUser().getNickName() + "进入了直播间");
                             break;
 
                         //直播间统计消息
                         case "WebcastRoomUserSeqMessage":
                             Douyin.RoomUserSeqMessage RoomUserSeqMessage = Douyin.RoomUserSeqMessage.parseFrom(SingleMsg.getPayload());
-                            System.out.println("【统计】当前观看人数：" + RoomUserSeqMessage.getTotalStr() + ",累计观看人数：" + RoomUserSeqMessage.getTotalPvForAnchor());
+                            MsgOutput("【统计】当前观看人数：" + RoomUserSeqMessage.getTotalStr() + ",累计观看人数：" + RoomUserSeqMessage.getTotalPvForAnchor());
                             break;
 
                         //点赞消息
                         case "WebcastLikeMessage":
                             Douyin.LikeMessage LikeMessage = Douyin.LikeMessage.parseFrom(SingleMsg.getPayload());
-                            System.out.println("【点赞】" + LikeMessage.getUser().getNickName() + "点了" + LikeMessage.getCount() + "个赞");
+                            MsgOutput("【点赞】" + LikeMessage.getUser().getNickName() + "点了" + LikeMessage.getCount() + "个赞");
                             break;
 
                         //礼物消息
                         case "WebcastGiftMessage":
                             Douyin.GiftMessage GiftMessage = Douyin.GiftMessage.parseFrom(SingleMsg.getPayload());
-                            System.out.println("【礼物】" + GiftMessage.getUser().getNickName() + "送出了" + GiftMessage.getGift().getName() + (GiftMessage.getGift().getCombo()? "x" + GiftMessage.getComboCount() : ""));
+                            MsgOutput("【礼物】" + GiftMessage.getUser().getNickName() + "送出了" + GiftMessage.getGift().getName() + (GiftMessage.getGift().getCombo()? "x" + GiftMessage.getComboCount() : ""));
                             break;
 
                         //粉丝团消息
                         case "WebcastFansclubMessage":
                             Douyin.FansclubMessage FansclubMessage = Douyin.FansclubMessage.parseFrom(SingleMsg.getPayload());
-                            System.out.println("【粉丝团】" + FansclubMessage.getContent());
+                            MsgOutput("【粉丝团】" + FansclubMessage.getContent());
                             break;
 
                         default:
@@ -142,6 +145,18 @@ public class WSListener extends WebSocketListener {
         }
 
         return out.toByteArray();
+    }
+
+    public void setGui(gui gui){
+        this.gui = gui;
+    }
+
+    public void MsgOutput(String msg) {
+        if (this.gui == null){
+            System.out.println(msg);
+        } else {
+            this.gui.DanmakuOutput(msg + "\n");
+        }
     }
 
 }

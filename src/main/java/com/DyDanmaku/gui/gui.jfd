@@ -1,0 +1,49 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "17.0.11" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+			"$layoutConstraints": "hidemode 3"
+			"$columnConstraints": "[40:213,fill][616,fill][114,fill]"
+			"$rowConstraints": "[235][][]"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+				name: "DanmakuScrollPanel"
+				add( new FormComponent( "javax.swing.JTextArea" ) {
+					name: "DanmakuArea"
+					"rows": 15
+					"editable": false
+					auxiliary() {
+						"JavaCodeGenerator.variableModifiers": 1
+					}
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 0 2 1"
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "RoomNumberLabel"
+				"text": "输入抖音房间号："
+				"horizontalAlignment": 4
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 1"
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "RoomNumberInput"
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 1 1"
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "ConnectButton"
+				"text": "连接"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "RoomConnect", true ) )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 2 1"
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 165, 110 )
+			"size": new java.awt.Dimension( 930, 535 )
+		} )
+	}
+}
