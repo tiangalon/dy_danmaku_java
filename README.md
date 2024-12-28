@@ -34,9 +34,9 @@ IDEA运行效果图：<br>
 | 2024.7.12 13:25  | 修复Signature签名功能 测试可用                  |
 | 2024.11.30 10:25 | 修复roomId和user_unique_id获取错误问题 测试可用    |:
 | 2024.12.22 18:50 | 添加重试功能，可设定0~无限次重试次数和重试间隔时间；关闭cookie警告 |
-| 2025.12.18 00:10 | 优化代码结构，添加简易GUI（优化中。。。）                |
+| 2024.12.28 00:10 | 优化代码结构，添加简易GUI（优化中。。。）                |
 
 </details>
 
-## :star: :star:
-[![Stargazers over time](https://starchart.cc/tiangalon/dy_danmaku_java.svg?variant=adaptive)](https://starchart.cc/tiangalon/dy_danmaku_java)
+## :star: :star:趋势
+[![Star History Chart](https://api.star-history.com/svg?repos=tiangalon/dy_danmaku_java&type=Date)](https://star-history.com/#tiangalon/dy_danmaku_java&Date)
