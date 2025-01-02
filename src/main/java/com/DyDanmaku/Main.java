@@ -18,7 +18,7 @@ public class Main {
 
         //———————————————————————↓↓↓参数设定↓↓↓———————————————————————————————————————
         //直播间网页id， 即直播间网址https://live.douyin.com/后面的数字部分
-        String live_id = "171705310987";
+        String live_id = "61339262466";
 
         //RetryTimes: 重试次数
         //RetryTimes = 0 表示不重试(默认)

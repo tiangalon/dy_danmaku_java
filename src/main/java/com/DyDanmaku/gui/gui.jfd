@@ -9,6 +9,40 @@ new FormModel {
 			"$rowConstraints": "[235][][]"
 		} ) {
 			name: "this"
+			"title": "抖音弹幕获取工具"
+			"defaultCloseOperation": 3
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class net.miginfocom.swing.MigLayout ) {
+				"$layoutConstraints": "hidemode 3"
+				"$columnConstraints": "[189,fill]"
+				"$rowConstraints": "[84,center][][][]"
+			} ) {
+				name: "Roominfo"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "avatar_label"
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 0"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "nickname_label"
+					"text": "主播："
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 1"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "title_label"
+					"text": "直播标题："
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 2"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "status_label"
+					"text": "当前状态："
+				}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+					"value": "cell 0 3"
+				} )
+			}, new FormLayoutConstraints( class net.miginfocom.layout.CC ) {
+				"value": "cell 0 0"
+			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "DanmakuScrollPanel"
 				add( new FormComponent( "javax.swing.JTextArea" ) {

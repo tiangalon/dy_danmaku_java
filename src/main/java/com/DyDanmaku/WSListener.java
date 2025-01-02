@@ -27,12 +27,14 @@ public class WSListener extends WebSocketListener{
     public void onClosed(WebSocket webSocket, int code, String reason){
         super.onClosed(webSocket, code, reason);
         //System.out.println("已断开连接");
-        try {
-            Main.barrier.await();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        } catch (BrokenBarrierException e) {
-            throw new RuntimeException(e);
+        if (gui == null) {
+            try {
+                Main.barrier.await();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            } catch (BrokenBarrierException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 

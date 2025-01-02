@@ -11,6 +11,15 @@ import com.DyDanmaku.gui.gui;
 public class WebSocketClient {
     private WSListener Listener = new WSListener();
     private WebSocket ws;
+    private gui gui;
+
+    public WebSocketClient() {
+        Listener.setGui(null);
+    }
+
+    public WebSocketClient(gui gui) {
+        Listener.setGui(gui);
+    }
 
     /**
      * websocket连接
@@ -84,7 +93,4 @@ public class WebSocketClient {
         }
     }
 
-    public void gui_init(gui gui) {
-        Listener.setGui(gui);
-    }
 }

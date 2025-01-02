@@ -35,6 +35,7 @@ public class DyDanmakuRequest {
         String live_status = null;
         String live_title = null;
         String nickname = null;
+        String avatar = null;
         Map<String, String> params = new HashMap<String, String>();
         CloseableHttpClient httpClient = HttpClients.createDefault();
 
@@ -72,11 +73,14 @@ public class DyDanmakuRequest {
                 live_title = live_title.substring(0, live_title.indexOf("\\"));
                 nickname = temp.substring(temp.indexOf("\\\"nickname\\\":\\\"")+15, temp.indexOf("\\\"nickname\\\":\\\"") + 100);
                 nickname = nickname.substring(0, nickname.indexOf("\\"));
+                avatar = temp.substring(temp.indexOf("\\\"avatar_thumb\\\":{\\\"url_list\\\":[\\\"")+34, temp.indexOf("\\\"avatar_thumb\\\":{\\\"url_list\\\":[\\\"") + 250);
+                avatar = avatar.substring(0, avatar.indexOf("\\"));
                 params.put("roomId", roomId);
                 params.put("user_unique_id", user_unique_id);
                 params.put("live_status", live_status);
                 params.put("live_title", live_title);
                 params.put("nickname", nickname);
+                params.put("avatar", avatar);
 
 
                 Header responseHeader = response.getFirstHeader("Set-Cookie");
