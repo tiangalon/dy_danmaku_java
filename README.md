@@ -12,7 +12,7 @@
 ## 【效果图】<br>
 
 GUI(编写中)运行效果图：<br>
-![效果图_gui_24_12_28](https://github.com/user-attachments/assets/9d7c3f5e-40da-44e9-a563-5f764148ee53)<br>
+![效果图_gui_25_1_2](https://github.com/user-attachments/assets/23342f82-766c-4e17-acc7-0ef2e686c956)<br>
 IDEA运行效果图：<br>
 ![效果图_24_7_1](https://github.com/tiangalon/dy_danmaku_java/assets/74497485/5f7e8e29-3fc6-4b68-b355-7b11ece071f0)<br>
 
